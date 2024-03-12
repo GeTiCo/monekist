@@ -1,0 +1,123 @@
+﻿<Window x:Class="monekist.Views.Catalog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:monekist.Views"
+        mc:Ignorable="d"
+        Title="Catalog" Height="600" Width="900">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--Заголовок-->
+        <Grid Grid.Row="0" Background="#f20f0f" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Resources/logo.jpg"
+       Height="65"
+       Grid.Column="0"
+       VerticalAlignment="Center"
+       HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource Title}"
+           Grid.Column="1"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"
+           Text="Каталог"/>
+                <TextBlock Style="{StaticResource Title}"
+           Grid.Column="1"
+           Name="userName"
+           FontSize="14"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"
+           Text="-"/>
+            </StackPanel>
+            <Button x:Name="buttonNavigate"
+            Style="{StaticResource Title}"
+            Content="Выход"
+            Grid.Column="2"
+            Margin="5, 7.5, 5, 7.5"
+            Background="#cc8b8b"
+            Click="buttonExit_Click"/>
+        </Grid>
+        <!--Основа-->
+        <Grid Grid.Row="1">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <!--Товары-->
+            <ListBox Grid.Row="1" Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListBoxProduct" SelectionChanged="ListBoxProduct_SelectionChanged" Background="White">
+                <ListBox.ContextMenu>
+                    <ContextMenu Name="cmAddInOrder">
+                        <MenuItem Name="miAddInOrder" Header="Добавить к заказу" Click="miAddInOrder_Click"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Height="90">
+                            <Image x:Name="ImageProduct" Width="110" Source="{Binding Path= PhotoCorrect}" Margin="5, 5"/>
+                            <StackPanel  Orientation="Vertical" Margin="20, 0" Width="190">
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=Product.idProduct, StringFormat='Артикул: {0}'}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=Product.productName, StringFormat='Название: {0}'}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=Product.productCost, StringFormat='Цена: {0}'}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="20, 0">
+                                <TextBlock TextWrapping="Wrap" Width="160" Text="{Binding Path=Product.productDescriptoin, StringFormat='Описание: {0}'}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=Product.productMarker, StringFormat='Производитель: {0}'}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!--Фильтры-->
+            <Grid Grid.Column="0">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Resources/mainWallpaper.jpeg" Opacity="0.3"/>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" Grid.Column="1" Text="Фильтры" Style="{StaticResource Title}" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Сортировка по стоимости" Style="{StaticResource Normal}"  HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Фильтр по скидке" Style="{StaticResource Normal}"  HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="Фильтр по категории" Style="{StaticResource Normal}"  HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="Поиск по названию" Style="{StaticResource Normal}"  HorizontalAlignment="Center"/>
+                <ComboBox Name="cbSort" SelectionChanged="cbSort_SelectionChanged" Height="25px" Width="220px" Margin="0,10,0,0" Grid.Row="1" Grid.Column="1">
+                    <ComboBoxItem Content="По возрастанию"/>
+                    <ComboBoxItem Content="По убыванию"/>
+                </ComboBox>
+                <ComboBox Name="cbFilterDiscount" SelectionChanged="cbFilterDiscount_SelectionChanged" Height="25px" Width="220px" Margin="0,10,0,0" Grid.Row="2" Grid.Column="1">
+                    <ComboBoxItem Content="Все диапазоны"/>
+                    <ComboBoxItem Content="До 100р"/>
+                    <ComboBoxItem Content="До 250р"/>
+                    <ComboBoxItem Content="До 500р"/>
+                </ComboBox>
+                <ComboBox Name="cbFilterCategory" SelectionChanged="cbFilterCategory_SelectionChanged" Height="25px" Width="220px" Margin="0,10,0,0" Grid.Row="3" Grid.Column="1">
+                </ComboBox>
+                <TextBox x:Name="tbSearch" TextChanged="tbSearch_TextChanged" Grid.Row="4" Grid.Column="0" Height="25px" Width="220px" Margin="0,10,0,0" />
+                <Button x:Name="buttonOrder"
+            Style="{StaticResource Title}"
+            Content="Заказ"
+            Grid.Row="5"
+            Margin="25, 20"
+            Background="#FFCC6600"
+            Click="buttonOrder_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

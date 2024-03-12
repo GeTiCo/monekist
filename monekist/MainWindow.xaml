@@ -1,0 +1,80 @@
+﻿<Window x:Class="monekist.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:monekist"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/mainWallpaper.jpeg" Opacity="0.3"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--Заголовок-->
+        <Grid Grid.Row="0" Background="#f20f0f" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Resources/logo.jpg"
+   Height="65"
+   Grid.Column="0"
+   VerticalAlignment="Center"
+   HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource Title}"
+       Grid.Column="1"
+       HorizontalAlignment="Center"
+       VerticalAlignment="Center"
+       Text="Maneki-Neko"/>
+            </StackPanel>
+            <Button x:Name="buttonNavigate"
+        Style="{StaticResource Title}"
+        Content="Выход"
+        Grid.Column="2"
+        Margin="5, 7.5, 5, 7.5"
+        Background="#cc8b8b"
+        Click="buttonExit_Click"/>
+        </Grid>
+        <!--Авторизация-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.3*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" FontSize="25" Text="Логин" Style="{StaticResource Normal}" 
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,5"/>
+            <TextBlock Grid.Row="2" FontSize="25" Text="Пароль" Style="{StaticResource Normal}" 
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,5"/>
+            <TextBox Name="textBoxLogin" VerticalContentAlignment="Center" FontSize="25" Style="{StaticResource Normal}" Grid.Column="1"
+                 Grid.Row="1" Text="Rin" HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Stretch" Margin="20,10" />
+            <TextBox Name="textBlockPassword" VerticalContentAlignment="Center" FontSize="25" Style="{StaticResource Normal}" Grid.Column="1" 
+                 Grid.Row="2" Text="1234" HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Stretch" Margin="20,10" />
+
+
+
+            <Button Name="buttonGuest" Style="{StaticResource Title}" Content="Гость" Grid.Row="4" 
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20 10" 
+              Background="#cc8b8b" Click="buttonGuest_Click"/>
+            
+            <Button Name="buttonUser" Style="{StaticResource Title}" Grid.Column="1" 
+              Content="Войти" Grid.Row="4" HorizontalAlignment="Stretch" 
+             VerticalAlignment="Stretch" Margin="20 10" Background="#cc8b8b" Click="buttonUser_Click"/>
+        </Grid>
+    </Grid>
+</Window>
